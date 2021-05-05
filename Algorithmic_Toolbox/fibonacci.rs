@@ -3,16 +3,17 @@ use std::process;
 
 fn main() {
     let n: usize = read_length();
-    let mut numbers: Vec<u32> = Vec::new();
-    numbers.push(0);
-    numbers.push(1);
 
-    let result = fibonacci(n, numbers);
+    let result = fibonacci(n);
 
     println!("{}", result);
 }
 
-fn fibonacci(n: usize, mut arr: Vec<u32>) -> u32 {
+fn fibonacci(n: usize) -> u32 {
+    let mut numbers: Vec<u32> = Vec::new();
+    numbers.push(0);
+    numbers.push(1);
+    
     if n == 0 {
         return 0;
     }
@@ -22,11 +23,11 @@ fn fibonacci(n: usize, mut arr: Vec<u32>) -> u32 {
     }
 
     for num in 2..(n + 1) {
-        let next_num: u32 = arr[&num - 1] + arr[&num - 2];
-        arr.push(next_num)
+        let next_num: u32 = numbers[&num - 1] + numbers[&num - 2];
+        numbers.push(next_num)
     }
 
-    arr[n]
+    numbers[n]
 }
 
 fn read_length() -> usize {

@@ -15,7 +15,6 @@ fn get_pisano_period(m: u64) -> u64 {
     let mut curr: u64 = 1;
     let mut res: u64 = 0;
 
-    // based on theory that period will not exceed m*m
     for i in 0..m * m {
         let temp;
         temp = curr;
