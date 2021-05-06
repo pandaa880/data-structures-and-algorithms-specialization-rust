@@ -1,3 +1,4 @@
+
 use std::io;
 
 // the formula to compute sum of nth fibonacci number is
@@ -10,8 +11,6 @@ fn main() {
     // based on formula we will calculate n+2 fibonacci numbers last digit
     let fibonacci_num_a: u128 = get_fibonacci_huge(a + 1, 10);
     let fibonacci_num_b: u128 = get_fibonacci_huge(b + 2, 10) + 10;
-
-    println!("a is {}.. b is {}", fibonacci_num_a, fibonacci_num_b);
 
     let result: u128;
 

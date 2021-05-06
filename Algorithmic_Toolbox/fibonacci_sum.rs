@@ -1,27 +1,23 @@
 use std::io;
+use std::process;
 
 // the formula to compute sum of nth fibonacci number is
 // F(n+2) - 1
 
 fn main() {
-    let nums: (u64, u64) = read_numbers();
-
-    let (a, b) = nums;
+    let a: u64 = read_number();
     // based on formula we will calculate n+2 fibonacci numbers last digit
-    let fibonacci_num_a: u128 = get_fibonacci_huge(a + 1, 10);
-    let fibonacci_num_b: u128 = get_fibonacci_huge(b + 2, 10) + 10;
+    let fibonacci_num: u128 = get_fibonacci_huge(a + 2, 10);
 
-    println!("a is {}.. b is {}", fibonacci_num_a, fibonacci_num_b);
+    let result;
 
-    let result: u128;
-
-    if fibonacci_num_a > fibonacci_num_b {
-        result = (fibonacci_num_a) - (fibonacci_num_b);
+    if fibonacci_num <= 0 {
+        result = 0;
     } else {
-        result = (fibonacci_num_b) - (fibonacci_num_a)
+       result = fibonacci_num - 1
     }
 
-    println!("{}", result % 10);
+    println!("{}", result);
 }
 
 fn get_pisano_period(m: u64) -> u64 {
@@ -69,17 +65,22 @@ fn get_fibonacci_huge(n: u64, m: u64) -> u128 {
     r
 }
 
-fn read_numbers() -> (u64, u64) {
+fn read_number() -> u64 {
     let mut input = String::new();
 
-    io::stdin()
-        .read_line(&mut input)
-        .expect("User input failed");
-    let mut words = input.split_whitespace();
+    io::stdin().read_line(&mut input).unwrap();
 
-    // convert to numbers
-    let num1: u64 = words.next().unwrap().parse().unwrap();
-    let num2: u64 = words.next().unwrap().parse().unwrap();
+    let digit: u64;
 
-    (num1, num2)
+    match input.trim().parse() {
+        Ok(val) => {
+            digit = val;
+        }
+        Err(_err) => {
+            println!("Please enter valid length number.");
+            process::exit(1);
+        }
+    }
+
+    digit
 }
