@@ -4,22 +4,28 @@ use std::process;
 fn main() {
     let m: u32 = read_number();
 
-    println!("{}", m);
+    let number_of_coins = change(m);
+
+    println!("{}", number_of_coins);
 }
 
-fn _read_numbers() -> (u64, u64) {
-    let mut input = String::new();
+fn change(mut m: u32) -> u32 {
+    let mut coins = 0;
 
-    io::stdin()
-        .read_line(&mut input)
-        .expect("User input failed");
-    let mut words = input.split_whitespace();
+    if m >= 10 {
+        coins = coins + (m / 10);
+        m = m % 10;
+    }
+    if m >= 5 {
+        coins = coins + (m / 5);
+        m = m % 5;
+    }
 
-    // convert to numbers
-    let num1: u64 = words.next().unwrap().parse().unwrap();
-    let num2: u64 = words.next().unwrap().parse().unwrap();
+    if m >= 1 {
+        coins = coins + m;
+    }
 
-    (num1, num2)
+    coins
 }
 
 fn read_number() -> u32 {
