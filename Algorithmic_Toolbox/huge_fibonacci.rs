@@ -33,25 +33,20 @@ fn get_fibonacci_huge(n: u64, m: u64) -> u128 {
     let period_length: u64 = get_pisano_period(m);
     let n = n % period_length;
 
+    let mut r = n;
+
     let mut prev = 0;
     let mut curr = 1;
 
-    if n == 0 {
-        return 0;
-    } else if n == 1 {
-        return 1;
+    for _i in 1..n {
+        r = (prev + curr) % m;
+        prev = curr;
+        curr = r
     }
 
-    for _i in 0..n - 1 {
-        let temp;
-        temp = curr;
-        curr = (prev + curr) % m;
-        prev = temp;
-    }
+    let res: u128 = (r % m).into();
 
-    let r: u128 = (curr % m).into();
-
-    r
+    res
 }
 
 fn read_numbers() -> (u64, u64) {

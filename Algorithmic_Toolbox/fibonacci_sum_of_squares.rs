@@ -1,21 +1,16 @@
 use std::io;
 use std::process;
 
-// the formula to compute sum of nth fibonacci number is
-// F(n+2) - 1
+// the formula to compute sum of squares of nth fibonacci numbers
+// F(n)*F(n+1)
 
 fn main() {
     let a: u64 = read_number();
-    // based on formula we will calculate n+2 fibonacci numbers last digit
-    let fibonacci_num: u128 = get_fibonacci_huge(a + 2, 10);
+    // based on formula we will calculate n+1 fibonacci numbers last digit
+    let fibonacci_num_n: u128 = get_fibonacci_huge(a, 10);
+    let fibonacci_num_n_plus_one: u128 = get_fibonacci_huge(a + 1, 10);
 
-    let result;
-
-    if fibonacci_num <= 0 {
-        result = (10 + fibonacci_num) - 1;
-    } else {
-        result = fibonacci_num - 1
-    }
+    let result = (fibonacci_num_n * fibonacci_num_n_plus_one) % 10;
 
     println!("{}", result);
 }
